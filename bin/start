@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp /app/config/* $PATH_CONF
+
+exec /opt/elasticsearch/bin/elasticsearch
