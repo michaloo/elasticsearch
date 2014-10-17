@@ -26,3 +26,16 @@ you can open:
 to cleanup:
 
 `docker rm -f $CID && docker rm -v data_elasticsearch`
+
+# Run example
+
+Provided example assumes using [crane](https://github.com/michaelsauter/crane).
+Change dir to `examples/` and execute `crane lift`. This will bring three containers:
+
+- michaloo/elasticsearch
+- (michaloo/fluentd)[https://github.com/michaloo/fluentd]
+- ubuntu:14.04 (as a log producer)
+
+After lifting them up you can go to
+`http://your-docker-host:9200/_plugin/kibana3/index.html#/dashboard/file/logstash.json`
+to see the example logs (you may need to wait a minute for logs to show).
