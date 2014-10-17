@@ -17,7 +17,7 @@ you can open:
 
 `http://$PORT/_plugin/kopf/`
 
-`http://$PORT/_plugin/kibana/`
+`http://$PORT/_plugin/kibana3/`
 
 `http://$PORT/_plugin/HQ/`
 
