@@ -1,5 +1,18 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 MAINTAINER Michal Raczka me@michaloo.net
+
+# Expose port 9200
+EXPOSE 9200
+
+ENV PATH_CONF /opt/elasticsearch/config
+ENV PATH_DATA /opt/elasticsearch/data
+
+VOLUME [ "/opt/elasticsearch/data" ]
+
+WORKDIR /app
+
+# Start Elasticsearch
+CMD ["/app/bin/start"]
 
 # Install Java
 RUN apt-get update \
@@ -15,19 +28,5 @@ RUN /opt/elasticsearch/bin/plugin -install lmenezes/elasticsearch-kopf \
     && /opt/elasticsearch/bin/plugin -url http://download.elasticsearch.org/kibana/kibana/kibana-latest.zip -install elasticsearch/kibana3 \
     && /opt/elasticsearch/bin/plugin -install royrusso/elasticsearch-HQ
 
-# Expose port 9200
-EXPOSE 9200
-
-ENV PATH_CONF /opt/elasticsearch/config
-ENV PATH_DATA /opt/elasticsearch/data
-
-
-VOLUME [ "/opt/elasticsearch/data" ]
-
-# add startup scripts and config files
-WORKDIR /app
-ADD ./bin    /app/bin
-ADD ./config /app/config
-
-# Start Elasticsearch
-CMD ["/app/bin/start"]
+COPY ./bin    /app/bin
+COPY ./config /app/config

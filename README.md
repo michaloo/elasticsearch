@@ -3,11 +3,7 @@ Docker image with Elasticsearch and elasticsearch-kopf, kibana and elasticsearch
 # Get started
 To run that image with persistent data storage run:
 
-`docker run -d --name data_elasticsearch -v /opt/elasticsearch/data tianon/true`
-
-to create storage container and then you can start the elasticsearch itself:
-
-`CID=$(docker run -d -P --volumes-from data_elasticsearch michaloo/elasticsearch)`
+`CID=$(docker run -d -P -v data_elasticsearch:/opt/elasticsearch/data michaloo/elasticsearch)`
 
 after getting container port:
 
@@ -22,7 +18,6 @@ you can open:
 `http://$PORT/_plugin/HQ/`
 
 
-
 to cleanup:
 
 `docker rm -f $CID && docker rm -v data_elasticsearch`
@@ -33,7 +28,7 @@ Provided example assumes using [crane](https://github.com/michaelsauter/crane).
 Change dir to `examples/` and execute `crane lift`. This will bring three containers:
 
 - michaloo/elasticsearch
-- (michaloo/fluentd)[https://github.com/michaloo/fluentd]
+- [michaloo/fluentd](https://github.com/michaloo/fluentd)
 - ubuntu:14.04 (as a log producer)
 
 After lifting them up you can go to
